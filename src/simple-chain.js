@@ -1,32 +1,23 @@
-const { NotImplementedError } = require('../lib');
-
-/**
- * Implement chainMaker object according to task description
- *
- */
+const links = [];
 const chainMaker = {
-  getLength() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  getLength() { return links.length; },
+  addLink(value) {
+    links.push(arguments.length === 0 ? '' : String(value));
+    return this;
   },
-  addLink(/* value */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  removeLink(position) {
+    if (!Number.isInteger(position) || position < 1 || position > links.length) {
+      links.length = 0;
+      throw new Error("You can't remove incorrect link!");
+    }
+    links.splice(position - 1, 1);
+    return this;
   },
-  removeLink(/* position */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
-  },
-  reverseChain() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
-  },
+  reverseChain() { links.reverse(); return this; },
   finishChain() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    const result = links.map((value) => `( ${value} )`).join('~~');
+    links.length = 0;
+    return result;
   },
 };
-
-module.exports = {
-  chainMaker,
-};
+module.exports = { chainMaker };
